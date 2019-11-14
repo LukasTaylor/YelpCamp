@@ -2,7 +2,8 @@
 var express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
-  mongoose = require("mongoose");
+  mongoose = require("mongoose"),
+  Campground = require("./models/campground");
 
 //set due to deprecation
 mongoose.set("useNewUrlParser", true);
@@ -14,15 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //allows you to exclude file extension in res.render()
 app.set("view engine", "ejs");
 
-//setup schema aka the structure of the db
-var campgroundSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
-
-//creates an object model of the schema. This gives you db functionality
-var Campground = mongoose.model("Campground", campgroundSchema);
 
 //root route
 app.get("/", function(req, res) {
